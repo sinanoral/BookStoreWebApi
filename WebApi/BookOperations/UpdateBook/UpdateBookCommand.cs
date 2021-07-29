@@ -2,7 +2,7 @@
 using System.Linq;
 using WebApi.DbOperations;
 
-namespace WebApi.BookOperations.CreateBook
+namespace WebApi.BookOperations.UpdateBook
 {
     public class UpdateBookCommand
     {
@@ -26,10 +26,10 @@ namespace WebApi.BookOperations.CreateBook
             _dbContext.SaveChanges();
         }
 
-        public class UpdateBookModel
-        {
-            public string Title { get; set; }
-            public int GenreId { get; set; }
-        }
+    }
+    public class UpdateBookModel
+    {
+        public string Title { get; set; }
+        public int GenreId { get; set; }
     }
 }

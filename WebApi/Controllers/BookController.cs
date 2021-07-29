@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ using WebApi.DbOperations;
 using WebApi.GetBooks.GetBooksQuery;
 using static WebApi.BookOperations.CreateBook.CreateBookCommand;
 using static WebApi.BookOperations.CreateBook.UpdateBookCommand;
+using static WebApi.BookOperations.GetBooks.GetBookDetailQuery;
 using static WebApi.GetBooks.GetBooksQuery.GetBooksQuery;
 
 namespace WebApi.AddControllers
@@ -18,24 +20,27 @@ namespace WebApi.AddControllers
     public class BookController : ControllerBase
     {
         private readonly BookStoreDbContext _context;
-        public BookController(BookStoreDbContext context)
+        private readonly IMapper _mapper;
+
+        public BookController(BookStoreDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         [HttpGet]
         public List<BookViewModel> GetBooks()
         {
-            GetBooksQuery booksQuery = new GetBooksQuery(_context);
+            GetBooksQuery booksQuery = new GetBooksQuery(_context, _mapper);
             return booksQuery.Handle();
         }
 
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
-            GetBookByIdQuery getBookByIdQuery = new GetBookByIdQuery(_context);
+            GetBookDetailQuery getBookByIdQuery = new GetBookDetailQuery(_context, _mapper);
 
-            BookViewModel result;
+            BookDetailViewModel result;
             try
             {
                 getBookByIdQuery.Id = id;
@@ -52,7 +57,7 @@ namespace WebApi.AddControllers
         [HttpPost]
         public IActionResult AddBook([FromBody] CreateBookModel newBook)
         {
-            CreateBookCommand createBookCommand = new CreateBookCommand(_context);
+            CreateBookCommand createBookCommand = new CreateBookCommand(_context, _mapper);
             try
             {
                 createBookCommand.Model = newBook;

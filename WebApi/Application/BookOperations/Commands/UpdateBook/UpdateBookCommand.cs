@@ -21,6 +21,7 @@ namespace WebApi.BookOperations.UpdateBook
                 throw new InvalidOperationException("There is no book to update which has that id");
 
             book.GenreId = Model.GenreId == default ? book.GenreId : Model.GenreId;
+            book.AuthorId = Model.AuthorId == default ? book.AuthorId : Model.AuthorId;
             book.Title = Model.Title == default ? book.Title : Model.Title;
 
             _dbContext.SaveChanges();
@@ -31,5 +32,6 @@ namespace WebApi.BookOperations.UpdateBook
     {
         public string Title { get; set; }
         public int GenreId { get; set; }
+        public int AuthorId { get; set; }
     }
 }

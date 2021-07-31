@@ -14,7 +14,7 @@ using static WebApi.BookOperations.GetBooks.GetBookDetailQuery;
 namespace WebApi.AddControllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class BookController : ControllerBase
     {
         private readonly BookStoreDbContext _context;
@@ -51,7 +51,7 @@ namespace WebApi.AddControllers
         {
             CreateBookCommand createBookCommand = new CreateBookCommand(_context, _mapper);
             createBookCommand.Model = newBook;
-            CreateGenreCommandValidator validator = new CreateGenreCommandValidator();
+            CreateBookCommandValidator validator = new CreateBookCommandValidator();
             validator.ValidateAndThrow(createBookCommand);
             createBookCommand.Handle();
 

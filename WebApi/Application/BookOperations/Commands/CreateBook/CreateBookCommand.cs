@@ -2,6 +2,7 @@
 using System;
 using System.Linq;
 using WebApi.DbOperations;
+using WebApi.Entities;
 
 namespace WebApi.BookOperations.CreateBook
 {

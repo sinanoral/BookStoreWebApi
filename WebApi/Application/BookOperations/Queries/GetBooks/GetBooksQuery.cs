@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
-using WebApi.Common;
 using WebApi.DbOperations;
 
 namespace WebApi.GetBooks.GetBooksQuery
@@ -19,7 +19,7 @@ namespace WebApi.GetBooks.GetBooksQuery
 
         public List<BookViewModel> Handle()
         {
-            var books = _dbContext.Books.ToList();
+            var books = _dbContext.Books.Include(x => x.Genre).ToList();
             List<BookViewModel> vm = _mapper.Map<List<BookViewModel>>(books);
             return vm;
         }

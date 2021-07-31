@@ -1,10 +1,6 @@
 ﻿using AutoMapper;
 using FluentValidation;
-using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using WebApi.BookOperations.CreateBook;
 using WebApi.BookOperations.DeleteBook;
 using WebApi.BookOperations.GetBookDetail;
@@ -14,7 +10,6 @@ using WebApi.DbOperations;
 using WebApi.GetBooks.GetBooksQuery;
 using static WebApi.BookOperations.CreateBook.CreateBookCommand;
 using static WebApi.BookOperations.GetBooks.GetBookDetailQuery;
-using static WebApi.GetBooks.GetBooksQuery.GetBooksQuery;
 
 namespace WebApi.AddControllers
 {
@@ -32,10 +27,10 @@ namespace WebApi.AddControllers
         }
 
         [HttpGet]
-        public List<BookViewModel> GetBooks()
+        public IActionResult GetBooks()
         {
             GetBooksQuery booksQuery = new GetBooksQuery(_context, _mapper);
-            return booksQuery.Handle();
+            return Ok(booksQuery.Handle());
         }
 
         [HttpGet("{id}")]
@@ -56,7 +51,7 @@ namespace WebApi.AddControllers
         {
             CreateBookCommand createBookCommand = new CreateBookCommand(_context, _mapper);
             createBookCommand.Model = newBook;
-            CreateBookCommandValidator validator = new CreateBookCommandValidator();
+            CreateGenreCommandValidator validator = new CreateGenreCommandValidator();
             validator.ValidateAndThrow(createBookCommand);
             createBookCommand.Handle();
 
@@ -79,7 +74,7 @@ namespace WebApi.AddControllers
         [HttpDelete("{id}")]
         public IActionResult DeleteBook(int id)
         {
-            DeleteBookCommand deleteBookCommand = new DeleteBookCommand(_context); 
+            DeleteBookCommand deleteBookCommand = new DeleteBookCommand(_context);
             deleteBookCommand.Id = id;
             DeleteBookCommandValidator validator = new DeleteBookCommandValidator();
             validator.ValidateAndThrow(deleteBookCommand);

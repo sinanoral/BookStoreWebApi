@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq;
+using WebApi.Entities;
 
 namespace WebApi.DbOperations
 {
@@ -17,6 +18,12 @@ namespace WebApi.DbOperations
                 {
                     return;   // Data was already seeded
                 }
+
+                context.Genres.AddRange(
+                    new Genre { Name = "Personal Growth" },
+                    new Genre { Name = "Science Fiction" },
+                    new Genre { Name = "Romance" }
+                    );
 
                 context.Books.AddRange(
                     new Book { GenreId = 1, PageCount = 255, PublishDate = DateTime.Today, Title = "Namik Kemal" },

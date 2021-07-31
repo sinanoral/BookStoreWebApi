@@ -1,9 +1,8 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
-using WebApi.Common;
 using WebApi.DbOperations;
-using static WebApi.GetBooks.GetBooksQuery.GetBooksQuery;
 
 namespace WebApi.BookOperations.GetBooks
 {
@@ -20,7 +19,7 @@ namespace WebApi.BookOperations.GetBooks
 
         public BookDetailViewModel Handle()
         {
-            var book = _dbContext.Books.SingleOrDefault(x => x.Id == Id);
+            var book = _dbContext.Books.Include(x => x.Genre).SingleOrDefault(x => x.Id == Id);
             if (book is null)
                 throw new InvalidOperationException("There is no book which has that id");
 
@@ -28,7 +27,7 @@ namespace WebApi.BookOperations.GetBooks
             return vm;
         }
 
-        public class BookDetailViewModel 
+        public class BookDetailViewModel
         {
             public string Title { get; set; }
             public string Genre { get; set; }

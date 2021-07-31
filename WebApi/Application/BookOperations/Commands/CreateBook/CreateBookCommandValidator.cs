@@ -1,14 +1,11 @@
 ﻿using FluentValidation;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace WebApi.BookOperations.CreateBook
 {
-    public class CreateBookCommandValidator : AbstractValidator<CreateBookCommand>
+    public class CreateGenreCommandValidator : AbstractValidator<CreateBookCommand>
     {
-        public CreateBookCommandValidator()
+        public CreateGenreCommandValidator()
         {
             RuleFor(command => command.Model.GenreId).GreaterThan(0);
             RuleFor(command => command.Model.PageCount).GreaterThan(0);

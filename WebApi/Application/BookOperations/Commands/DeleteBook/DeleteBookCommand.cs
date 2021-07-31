@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using WebApi.DbOperations;
 
 namespace WebApi.BookOperations.DeleteBook
@@ -10,7 +8,7 @@ namespace WebApi.BookOperations.DeleteBook
     {
         private readonly BookStoreDbContext _dbContext;
         public int Id { get; set; }
-        
+
         public DeleteBookCommand(BookStoreDbContext dbContext)
         {
             _dbContext = dbContext;

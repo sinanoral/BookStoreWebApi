@@ -2,9 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -18,7 +16,7 @@ namespace WebApi.Middlewares
             _next = next;
         }
 
-        public async Task Invoke (HttpContext context)
+        public async Task Invoke(HttpContext context)
         {
             var watch = Stopwatch.StartNew();
             try
@@ -35,7 +33,7 @@ namespace WebApi.Middlewares
                 watch.Stop();
                 await HandleException(context, ex, watch);
             }
-            
+
         }
 
         private Task HandleException(HttpContext context, Exception ex, Stopwatch watch)

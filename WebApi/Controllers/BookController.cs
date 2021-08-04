@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using FluentValidation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.BookOperations.CreateBook;
 using WebApi.BookOperations.DeleteBook;
@@ -13,8 +14,9 @@ using static WebApi.BookOperations.GetBooks.GetBookDetailQuery;
 
 namespace WebApi.AddControllers
 {
+    [Authorize]
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/[controller]s")]
     public class BookController : ControllerBase
     {
         private readonly IBookStoreDbContext _context;

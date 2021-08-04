@@ -13,7 +13,7 @@ using WebApi.DbOperations;
 namespace WebApi.AddControllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/[controller]s")]
     public class GenreController : ControllerBase
     {
         private readonly IBookStoreDbContext _context;

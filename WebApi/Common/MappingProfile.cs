@@ -4,6 +4,7 @@ using WebApi.Application.AuthorOperations.Queries.GetAuthors;
 using WebApi.Application.GenreOperations.Commands.GetGenreDetail;
 using WebApi.Application.GenreOperations.Commands.GetGenres;
 using WebApi.Entities;
+using static WebApi.Application.UserOperations.Commands.CreateUser.CreateUserCommand;
 using static WebApi.BookOperations.CreateBook.CreateBookCommand;
 using static WebApi.BookOperations.GetBooks.GetBookDetailQuery;
 using static WebApi.GetBooks.GetBooksQuery.GetBooksQuery;
@@ -16,7 +17,7 @@ namespace WebApi.Common
         {
             CreateMap<CreateBookModel, Book>();
             CreateMap<Book, BookDetailViewModel>()
-                .ForMember(dest => dest.Genre,opt => opt.MapFrom(src => src.Genre.Name))
+                .ForMember(dest => dest.Genre, opt => opt.MapFrom(src => src.Genre.Name))
                 .ForMember(dest => dest.Author, opt => opt.MapFrom(src => src.Author.Name + " " + src.Author.Surname));
             CreateMap<Book, BookViewModel>()
                 .ForMember(dest => dest.Genre, opt => opt.MapFrom(src => src.Genre.Name))
@@ -28,6 +29,8 @@ namespace WebApi.Common
 
             CreateMap<Author, AuthorViewModel>();
             CreateMap<Author, AuthorDetailViewModel>();
+
+            CreateMap<CreateUserModel, User>();
         }
     }
 }

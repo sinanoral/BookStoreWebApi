@@ -20,7 +20,7 @@ namespace WebApi.GetBooks.GetBooksQuery
         public List<BookViewModel> Handle()
         {
             var books = _dbContext.Books.Include(x => x.Genre).Include(x => x.Author).ToList();
-            return  _mapper.Map<List<BookViewModel>>(books);
+            return _mapper.Map<List<BookViewModel>>(books);
         }
 
         public class BookViewModel

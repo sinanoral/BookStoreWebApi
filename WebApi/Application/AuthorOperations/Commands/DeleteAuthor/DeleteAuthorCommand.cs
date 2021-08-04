@@ -20,7 +20,7 @@ namespace WebApi.Application.AuthorOperations.Commands.DeleteAuthor
             if (author is null)
                 throw new InvalidOperationException("There is no author which has that id");
 
-            if(_context.Books.Any(book => book.AuthorId == Id))
+            if (_context.Books.Any(book => book.AuthorId == Id))
                 throw new InvalidOperationException("Author can not be deleted because has published book");
 
             _context.Authors.Remove(author);
